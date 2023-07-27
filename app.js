@@ -31,7 +31,7 @@ App({
         UserUnreadMessage: 'https://wlbbj.yangxiaobai.top/message/unreadPrivateMessage', // 未读的用户消息
         SystemUnreadMessage: 'https://wlbbj.yangxiaobai.top/message/unreadSystemMessage', // 未读的系统消息
         UserFirstList: 'https://wlbbj.yangxiaobai.top/message/getFirstList', // 用户消息的列表
-        
+        SystemFirstList: 'https://wlbbj.yangxiaobai.top/message/getNoticeList' // 系统通知的列表
       }
 
       

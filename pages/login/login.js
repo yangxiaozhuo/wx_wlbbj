@@ -35,7 +35,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-    let url = config.loginRequestUrl 
+    let url = config.user.login
     wx.request({
       url,
       method: "POST",
@@ -48,7 +48,6 @@ Page({
             title: resData.errorMsg,
             icon: 'none',
           })
-          return
         }  else if (resData.code !== 200) {
           wx.showToast({
             title: '未知错误',
@@ -60,31 +59,12 @@ Page({
             icon: 'none',
           })
           wx.setStorage({
-            key: 'token',
+            key: 'auth',
             data: resData.data
           })
-          wx.request({
-            url: config.getUserInfo + email,
-            success: (res) => {
-              let data = res.data
-              if(data.code == 200) {
-                wx.setStorage({
-                    key: 'auth',
-                    data: data.data
-                })
-              } else {
-                  wx.showToast({
-                    title: data.errorMsg,
-                    icon: 'none',
-                  })
-              }
-            },
-            fail: () => {
-              wx.showToast({
-                title: '网路开小差，请稍后再试',
-                icon: 'none',
-              })
-            },
+          wx.setStorage({
+            key: 'token',
+            data: resData.data.token
           })
           wx.switchTab({
             url: '/pages/index/index',

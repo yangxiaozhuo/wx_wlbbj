@@ -32,32 +32,26 @@
       <scroll-view wx:if='{{systemInfoList.length}}' scroll-y bindscrolltolower='getMoreUserNotification'>
         <view class='item' wx:for='{{systemInfoList}}' wx:key='index'>
           <view class='avatar' data-id='{{item.conversionId}}' catchtap='toPersonal'>
-            <image mode='aspectFill' src='{{ (item.fromAvatar == userInfo.avatar ?  item.toAvatar : item.fromAvatar) || "/img/default_avatar.png"}}'></image>
+            <image mode='aspectFill' src='{{ (item.conversionId == "like" ?  "../../img/zan_grey_feidian3.png" :  (item.conversionId == "comment" ? "../../img/ic_dynamic_comment.png" : "../../img/ic_collection_set.png" ))}}'></image>
+            <!-- img\ic_dynamic_collect.png -->
           </view>
-          <view class='content' wx:if='{{item.category==="collection"}}'>
-            <view>{{item.users[0].username}}等{{item.count}}人 喜欢了你的文章 <text data-id='{{item.entry && item.entry.objectId}}' catchtap='toPostDetail'>{{item.entry && item.entry.title}}</text></view>
-            <view class='time'>{{filters.timeBefore(item.updatedAtString)}}</view>
+          <view class='content' wx:if='{{item.conversionId==="like"}}'>
+            <view class = 'username' style="font-weight: normal;">有人给你点了赞
+              <view class='count reddot' wx:if='{{item.unread}}'>{{item.unread}}</view>
+            </view>
+            <view class='time'>{{filters.timeBefore(item.createdTime)}}</view>
           </view>
-          <view class='content' wx:elif='{{item.category==="comment"}}'>
-            <view>{{item.users[0].username}}回复了你在文章 <text data-id='{{item.entry && item.entry.objectId}}' catchtap='toPostDetail'>{{item.entry && item.entry.title}}</text> 的评论</view>
-            <view class='comment'>{{(item.reply && item.reply.content) || (item.comment && item.comment.content)}}</view>
-            <view class='time'>{{filters.timeBefore(item.updatedAtString)}}</view>
+          <view class='content' wx:elif='{{item.conversionId==="comment"}}'>
+            <view class = 'username' style="font-weight: normal;">有人回复了你
+              <view class='count reddot' wx:if='{{item.unread}}'>{{item.unread}}</view>
+            </view>
+            <view class='time'>{{filters.timeBefore(item.createdTime)}}</view>
           </view>
-          <view class='content' wx:elif='{{item.category==="follow"}}'>
-            <view>{{item.users[0] && item.users[0].username}} 关注了你</view>
-            <view class='time'>{{item.users[0] && item.users[0].jobTitle}}</view>
-          </view>
-          <view class='content' wx:elif='{{item.category==="comment-like"}}'>
-            <view>{{item.users[0] && item.users[0].username}} 赞了你在 <text>{{item.entry && item.entry.title}}</text> 的评论</view>
-          </view>
-          <view class='content' wx:elif='{{item.category==="pin-like"}}'>
-            <view>{{item.users[0] && item.users[0].username}} 赞了你的 <text>沸点</text></view>
-            <view class='time'>{{filters.timeBefore(item.updatedAtString)}}</view>
-          </view>
-          <view class='content' wx:elif='{{item.category==="pin-comment"}}'>
-            <view>{{item.users[0] && item.users[0].username}} 回复了你的 <text>沸点</text></view>
-            <view class='comment'>{{(item.reply && item.reply.content) || (item.pinComment && item.pinComment.content)}}</view>
-            <view class='time'>{{filters.timeBefore(item.updatedAtString)}}</view>
+          <view class='content' wx:elif='{{item.conversionId==="follow"}}'>
+            <view class = 'username' style="font-weight: normal;">有人关注了你
+              <view class='count reddot' wx:if='{{item.unread}}'>{{item.unread}}</view>
+            </view>
+            <view class='time'>{{filters.timeBefore(item.createdTime)}}</view>
           </view>
           <view class='content' wx:else>未知状态，可提交给开发者</view>
         </view>

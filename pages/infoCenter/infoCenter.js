@@ -99,7 +99,6 @@ Page({
   // 获取有多少条未读的用户消息
   getUnreadUserNotification(){
     let that = this
-    console.log("=========")
     wx.request({
       url: config.message.UserUnreadMessage,
       header: {"authorization" : that.data.token},
@@ -116,9 +115,6 @@ Page({
   // 获取有多少条未读的系统消息
   getUnreadSystemNotification(){
     let that = this
-    console.log("=========")
-    console.log(this.data)
-    console.log(this.data.token)
     wx.request({
       url: config.message.SystemUnreadMessage,
       header: {"authorization" : that.data.token},
@@ -140,8 +136,6 @@ Page({
       header: {"authorization" : that.data.token},
       success: (res) => {
         let data = res.data
-        console.log("message===============")
-        console.log(data)
         if (data.code === 200) {
           let list = data.data
           this.setData({
@@ -164,30 +158,24 @@ Page({
   },
   // 获取系统消息
   getSystemNotification() {
-    const auth = this.data.auth
+    let that = this
     wx.request({
-      url: `${config.userNotificationApiMsRequestUrl}/getSystemNotification`,
-      data: {
-        uid: auth.uid,
-        token: auth.token,
-        src: 'web',
-        device_id: auth.clientId,
-        pointer: '',
-      },
+      url: config.message.SystemFirstList,
+      header: {"authorization" : that.data.token},
       success: (res) => {
         let data = res.data
-        if (data.s === 1) {
-          let systemInfoList = data.d || []
+        console.log("SystemFirstList===============")
+        console.log(data)
+        if (data.code === 200) {
+          let systemInfoList = data.data
           this.setData({
-            systemInfoList,
+            systemInfoList: that.data.systemInfoList.concat(systemInfoList),
           })
         } else {
-          if (data.s !== 2) {
-            wx.showToast({
-              title: data.m.toString(),
-              icon: 'none',
-            })
-          }
+          wx.showToast({
+            title: data.m.toString(),
+            icon: 'none',
+          })
         }
       },
       fail: () => {
