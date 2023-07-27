@@ -1,0 +1,26 @@
+<!-- pages/index/index.wxml -->
+
+<view class="container">
+  <view wx:for="{{posts}}" wx:key="index" class="post-item" bindtap="onPostTap" data-post="{{item}}">
+    <view class="post-header">
+      <image class="avatar" src="{{item.avatar}}"></image>
+      <view class="post-info">
+        <view class="post-author">{{item.name}}</view>
+        <view class="post-time">{{item.createdTime}}</view>
+      </view>
+    </view>
+    <view class="post-body">
+      <view class="post-title">{{item.articleTitle}}</view>
+      <view class="post-content">{{item.articleContent}}</view>
+      <view wx:if="{{item.articleImg.length > 0}}">
+        <scroll-view scroll-x class="image-scroll">
+          <view class="image-list">
+            <view class="post-images" wx:for="{{item.articleImg}}" wx:key="index" data-post="{{it}}">
+              <image src="{{item}}"></image>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>

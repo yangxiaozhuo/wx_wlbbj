@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/infoCenter/infoCenter",
+    "pages/index/index",
+    "pages/editInfo/editInfo",
+    "pages/personal/personal",
+    "pages/logs/logs",
+    "pages/message/message",
+    "pages/info/info",
+    "pages/login/login",
+    "pages/editPassword/editPassword",
+    "components/empty/empty"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "武理bb机",
+    "navigationBarTextStyle": "black",
+    "homeButton": true
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#333",
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "image/button_icon/index-o.png",
+        "selectedIconPath": "image/button_icon/index.png"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "私信",
+        "iconPath": "image/button_icon/xiaoxi.png",
+        "selectedIconPath": "image/button_icon/xiaoxi_1.png"
+      },
+      {
+        "pagePath": "pages/info/info",
+        "text": "个人中心",
+        "iconPath": "image/button_icon/member-line.png",
+        "selectedIconPath": "image/button_icon/member-block.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+<view class='wrapper'>
+  <view class='top'>
+    <view class='logo'>
+      <image src='/image/logo-icon.jpg'></image>
+    </view>
+    <form class='form' bindsubmit='commit'>
+      <view>
+        <van-cell-group>
+          <van-field
+            label="邮箱"
+            model:value="{{ emailNumber }}"
+            placeholder="请输入用户名"
+            center="true"
+            title-width="3em"
+          />
+          <van-field
+            label="密码"
+            password = "true"
+            maxlength="16"
+            center="true"
+            model:value="{{ password }}"
+            placeholder="请输入密码"
+            title-width="3em"
+          />
+        </van-cell-group>
+      </view>
+    </form>
+    <van-button custom-style="margin-top: 40rpx;" block round type="info" bind:click="commit">登录</van-button>
+  </view>
+  <view class='footer'>武理论坛·whut</view>
+</view>

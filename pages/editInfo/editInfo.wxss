@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding-top: 20rpx;
+  box-sizing: border-box;
+}
+#avatarItem{
+  height: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+}
+.uploader {
+  /* text-align: center; */
+}
+.item .avatarView .avatar {
+  width: 150rpx;
+  height: 150rpx;
+  margin-right: 40rpx;
+  border-radius:50%;
+}
+.info {
+  display: flex;
+  flex: 1;
+  font-size: 24rpx;
+  color: #abb4bf;
+}
+.item.signout .title {
+  color: rgb(201, 40, 15);
+  justify-content: space-around;
+}
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80rpx;
+  font-size: 24rpx;
+  color: #333;
+  margin-top: 30rpx;
+}

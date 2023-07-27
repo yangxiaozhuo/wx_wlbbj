@@ -1,0 +1,78 @@
+/* pages/index/index.wxss */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f6f6f6;
+  padding: 20rpx;
+}
+
+.post-item {
+  width: 100%;
+  margin-bottom: 20rpx;
+  background-color: #ffffff;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+}
+
+.post-info {
+  margin-left: 20rpx;
+}
+
+.post-author {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.post-time {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.post-body {
+  padding: 20rpx;
+}
+
+.post-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.post-content {
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.post-images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.post-images image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
+.image-scroll {
+  height: 240rpx;
+}
+
+.image-list {
+  display: flex;
+  flex-direction: row;
+}

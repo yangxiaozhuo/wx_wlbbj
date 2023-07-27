@@ -1,0 +1,68 @@
+<view class='container'>
+  <view class='content'>
+    <view class='card items' wx:if='{{userInfo}}'>
+      <view class='item' id="avatarItem">
+        <view class='title'>
+          <view>头像</view>
+        </view>
+        <view class='avatarView'>
+          <image class='avatar' bindtap="previewImg" src='{{userInfo.avatar}}' wx:if='{{userInfo.avatar}}'></image>
+        </view>
+          <van-uploader class="uploader" preview-size="65px" max-count="1" upload-text="上传新头像" file-list="{{ fileList }}" bind:after-read="afterRead" />
+      </view>
+      <view class='item'>
+        <view class='title'>
+          <view>邮箱</view>
+        </view>
+        <view class='count'>{{userInfo.email}}</view>
+      </view>
+      <view class='item' wx:if='{{userInfo}}' bindtap="editName">
+        <view class='title'>
+          <view>用户名</view>
+        </view>
+        <view class='count'>{{userInfo.nickName}}</view>
+      </view>
+      <view class='item' wx:if='{{userInfo}}' bindtap="editSex">
+        <view class='title'>
+          <view>性别</view>
+        </view>
+        <view class='count'>{{userInfo.sex == '0' ? '男' : '女'}}</view>
+      </view>
+      <view class='item'  wx:if='{{userInfo}}' bindtap="editPassword" catchtap='navigatItem' data-url='/pages/editPassword/editPassword' >
+        <view class='title'>
+          <view>修改账户密码</view>
+        </view>
+      </view>
+    </view>
+
+    <view class='card items'>
+      <view class='item' catchtap='clearStorage'>
+        <view class='title'>
+          <view>清除缓存数据</view>
+        </view>
+      </view>
+
+    </view>
+
+    <view class='card items'>
+      <navigator url='/pages/about/about'>
+        <view class='item'>
+          <view class='title'>
+            <view>关于</view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+
+    <view class='card items' wx:if='{{userInfo}}'>
+      <view class='item signout' catchtap='signout'>
+        <view class='title'>
+          <view>退出登录</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <navigator url='/pages/about/about' hover-class='none'>
+    <view class='footer'>开发者 · yangxiaobai</view>
+  </navigator>
+</view>

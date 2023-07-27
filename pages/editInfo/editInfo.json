@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "设置",
+  "usingComponents": {
+    "van-uploader": "@vant/weapp/uploader/index"
+  }
+}
