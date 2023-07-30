@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "搜索",
+  "usingComponents": {
+    "searchPost":"/components/searchPost/searchPost",
+    "van-search": "@vant/weapp/search/index",
+    "hotPost": "/components/hotPost/hotPost"
+  }
+}

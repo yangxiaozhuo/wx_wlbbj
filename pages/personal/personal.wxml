@@ -21,7 +21,6 @@
           <view class='key'>关注者</view>
         </view>
       </view>
-      <view class='edit'>编辑</view>
       <image src='/img/ic_dynamic_vote.png' class='trend' catchtap='showDataTrend'></image>
     </view>
   </view>

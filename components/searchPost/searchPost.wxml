@@ -1,0 +1,24 @@
+<wxs module='filters' src='../../filter/filter.wxs'></wxs>
+<view class="item" hover-class='hover-class' data-item='{{item}}' catchtap='toPostDetail'>
+  <view class='content'>
+    <view class='title' wx:if="{{!item.highlightFields.articleTitle}}">{{item.content.articleTitle}}</view>
+    <view class='title' wx:else>
+      <rich-text wx:for="{{item.highlightFields.articleTitle}}" nodes="{{item}}" wx:key="index" ></rich-text>
+    </view>
+    <view class='articleContent' wx:if="{{item.highlightFields.articleContent.length == 0}}">{{item.content.articleContent}}</view>
+    <view class='articleContent' wx:else>
+      <rich-text wx:for="{{item.highlightFields.articleContent}}" nodes="{{item}}" wx:key="index" >123</rich-text>
+    </view>
+    
+    <view class='labels'>
+      <view class='label'>
+        <image class="image" src='/img/ic_dynamic_tag.png'></image>
+        <view>{{item.content.articleCategoryName}}</view>
+      </view>
+      <view class='label'>
+        <image  class="image" src='/img/ic_time.png'></image>
+        <view>{{filters.timeBefore(item.content.createdTime)}}</view>
+      </view>
+    </view>
+  </view>
+</view>

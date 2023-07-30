@@ -79,4 +79,9 @@ Page({
       },
     })
   },
+  create() {
+    wx.navigateTo({
+      url: '/pages/loginUp/loginUp',
+    })
+  }
 })

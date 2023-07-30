@@ -13,11 +13,11 @@
   <swiper class='swiper' autoplay='{{false}}' indicator-dots='{{false}}' bindchange='swiperChanged' current='{{currentSwiper}}'>
     <swiper-item item-id='0'>
       <scroll-view wx:if='{{list.length}}' scroll-y bindscrolltolower='getMoreUserNotification'>
-        <view class='item' wx:for='{{list}}' wx:key='index'>
-          <view class='avatar' data-id='{{item.conversionId}}' catchtap='toPersonal'>
+        <view class='item' wx:for='{{list}}' wx:key='index' >
+          <view class='avatar' data-id='{{(item.fromId == userInfo.email ?  item.toId : item.fromId) }}' catchtap='toPersonal'>
             <image mode='aspectFill' src='{{ (item.fromAvatar == userInfo.avatar ?  item.toAvatar : item.fromAvatar) || "/img/default_avatar.png"}}'></image>
           </view>
-          <view class='content' >
+          <view class='content' data-id='{{(item.fromId == userInfo.email ?  item.toId : item.fromId) }}'catchtap='toConversion'>
             <view class='username'>{{(item.fromNickname == userInfo.nickName ?  item.toNickname : item.fromNickname)}}
               <view class='count reddot' wx:if='{{item.unread}}'>{{item.unread}}</view>
             </view>
@@ -33,7 +33,6 @@
         <view class='item' wx:for='{{systemInfoList}}' wx:key='index'>
           <view class='avatar' data-id='{{item.conversionId}}' catchtap='toPersonal'>
             <image mode='aspectFill' src='{{ (item.conversionId == "like" ?  "../../img/zan_grey_feidian3.png" :  (item.conversionId == "comment" ? "../../img/ic_dynamic_comment.png" : "../../img/ic_collection_set.png" ))}}'></image>
-            <!-- img\ic_dynamic_collect.png -->
           </view>
           <view class='content' wx:if='{{item.conversionId==="like"}}'>
             <view class = 'username' style="font-weight: normal;">有人给你点了赞

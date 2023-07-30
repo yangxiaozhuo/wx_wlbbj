@@ -1,0 +1,48 @@
+<wxs module='filters' src='../../filter/filter.wxs'/>
+<view class="all" style='overflow:hidden' catchtap='toFeidianDetail'>
+  <view class='user'>
+    <jImage class='avatar' mode='aspectFill' src='{{postInfo.avatar || "/img/default_avatar.png"}}' catchtap='toPersonal'></jImage>
+    <view class='others'>
+      <view class='l'>
+        <view data-actor='{{actor}}' catchtap='toPersonal'>{{postInfo.name}}</view>
+        <view data-actor='{{actor}}' catchtap='toPersonal' class='jobtitle'>
+          <text wx:if="{{postInfo.createdTime == postInfo.updateTime}}" >更新于：{{filters.timeBefore(postInfo.createdTime)}}</text>
+          <text class="create">创建于：{{filters.timeBefore(postInfo.createdTime)}}</text>
+        </view>
+      </view>
+      <view class='r'>
+        <image class='more' src='/img/ic_pin_more.png'></image>
+      </view>
+    </view>
+  </view>
+  <view wx:if='{{postInfo.articleCategoryName}}' class='tag'>{{postInfo.articleCategoryName}}</view>
+  <text class="title">{{postInfo.articleTitle}}</text>
+  <text decode class='content'>{{postInfo.articleContent}}</text>
+  <view class='pictures' wx:if='{{postInfo.articleImg && postInfo.articleImg.length}}'>
+    <!-- 大于等于两张图片 -->
+    <view data-index='{{index}}' data-urls='{{postInfo.articleImg}}' catchtap='preview' class='picture' style='width:33.33%;height:228rpx;' wx:key='index' wx:for='{{postInfo.articleImg}}' wx:for-item='i' wx:if='{{postInfo.articleImg.length >= 2}}'>
+      <jImage wx:key='index' mode='aspectFill' src='{{i}}'></jImage>
+    </view>
+    <!-- 一张图片 -->
+    <view data-index='{{index}}' data-urls='{{postInfo.articleImg}}' catchtap='preview' class='picture' style='width:80%;height:548rpx;' wx:if='{{postInfo.articleImg.length === 1}}'>
+      <jImage mode='widthFix' src='{{postInfo.articleImg[0]}}'></jImage>
+    </view>
+  </view>
+<view class='footer'>
+  <view class='i' bindtap="likeIt">
+    <image wx:if='{{postInfo.liked}}' src='/img/zan_green_feidian3.png'></image>
+    <image wx:if='{{!postInfo.liked}}'  src='/img/zan_grey_feidian3.png'></image>
+    <text>{{postInfo.articleLikeCount || '赞'}}</text>
+  </view>
+  <view class='i'>
+    <image src='/img/fd_reply.png'></image><text>{{postInfo.articleCommentCount || '评论'}}</text>
+  </view>
+  <view class='i'>
+    <image src='/img/fd_share.png'></image>
+    <button plain='true' open-type='share' class='share'></button>
+  </view>
+</view>
+</view>
+
+<view class="footerfa">
+</view>

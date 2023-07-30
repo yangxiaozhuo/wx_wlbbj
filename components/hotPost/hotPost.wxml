@@ -1,0 +1,42 @@
+<wxs module='filters' src='../../filter/filter.wxs'></wxs>
+<view class="item" hover-class='hover-class' data-item='{{item}}' catchtap='toPostDetail'>
+  <view class='content'>
+    <view class='title' >{{item.articleTitle}}</view>
+    <view class='articleContent'>{{item.articleContent}}</view>
+    <view wx:if="{{item.articleImg.length > 0 && item.articleImg[0]}}">
+      <scroll-view scroll-x class="image-scroll">
+        <view class="image-list">
+          <view class="post-images" wx:for="{{item.articleImg}}" wx:key="index" data-post="{{it}}">
+            <image src="{{item}}"></image>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class='labels'>
+      <view class='label'>
+        <image class="image" src='{{item.avatar}}'></image>
+        <view>{{item.name}}</view>
+      </view>
+      <view class='label'>
+        <image class="image" src='/img/ic_view.png'></image>
+        <view>{{item.articleViewCount}}</view>
+      </view>
+      <view class='label'>
+        <image class="image" src='{{item.liked ? "/img/ic_heart_entry_bottom_full.png" : "/img/ic_dynamic_collect.png"}}'></image>
+        <view>{{item.articleLikeCount}}</view>
+      </view>
+      <view class='label'>
+        <image class="image" src='/img/ic_dynamic_comment.png'></image>
+        <view>{{item.articleCommentCount}}</view>
+      </view>
+      <view class='label'>
+        <image class="image" src='/img/ic_dynamic_tag.png'></image>
+        <view>{{item.articleCategoryName}}</view>
+      </view>
+      <view class='label'>
+        <image  class="image" src='/img/ic_time.png'></image>
+        <view>{{filters.timeBefore(item.createdTime)}}</view>
+      </view>
+    </view>
+  </view>
+</view>

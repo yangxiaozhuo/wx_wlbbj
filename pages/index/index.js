@@ -1,12 +1,14 @@
 // pages/index/index.js
-
+const utils = require('../../utils/util')
+const config = getApp().globalData.config
+const globalData = getApp().globalData
 Page({
   data: {
     posts: [],
     currentPage: 1,
     pageSize: 10,
   },
-  onLoad: function() {
+  onShow: function() {
     this.loadPosts();
   },
   loadPosts: function() {
@@ -38,9 +40,7 @@ Page({
   },
   onPostTap: function(event) {
     var post = event.currentTarget.dataset.post;
-    wx.navigateTo({
-      url: '/pages/post/post?postId=' + post.postId,
-    });
+    utils.toPostDetail(post)
   },
   onReachBottom: function() {
     this.setData({

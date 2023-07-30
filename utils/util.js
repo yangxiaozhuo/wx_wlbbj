@@ -51,6 +51,21 @@ let navigatItem = (e) => {
   }
 }
 
+let delay = (milSec) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, milSec)
+  })
+}
+
+let toPostDetail = (e) => {
+  let postId = e.articleId
+  let url = ''
+  url = `/pages/post/post?id=${postId}`
+  wx.navigateTo({
+    url,
+  })
+}
+
 let refleshInfo = (email) => {
   
 }
@@ -156,24 +171,12 @@ var getPostIdByOriginalUrl = function (url) {
   return GetUrlRelativePath(url).split('/').slice(-1)[0]
 };
 
-// type = 1 post 原创文章, type = 2 article 分享文章（entry）
-let toPostDetail = (e) => {
-  let item = e.currentTarget.dataset.item
-  let postId = getPostIdByOriginalUrl(item.originalUrl)
-  let entryId = item.objectId
-  let t = item.type
-  let url = ''
-  let id = t === 'post' ? postId : entryId
-  url = `/pages/post/post?id=${id}&type=${t}`
-  wx.navigateTo({
-    url,
-  })
-}
 
 module.exports = {
   ifLogined,
   navigatItem,
   refleshInfo,
+  delay,
 
   formatDate,
   isValidMobile,

@@ -6,16 +6,17 @@ Page({
     token: "",
     thirduid: '',
   },
-  onShow(query) {
+  onLoad(query) {
+    console.log(query)
     let that = this
-    wx.getStorage({
-      key: 'auth',
-      success (res) {
-        that.setData({
-          userInfo: res.data
-        })
-      } 
-    })
+    // wx.getStorage({
+    //   key: 'auth',
+    //   success (res) {
+    //     that.setData({
+    //       userInfo: res.data
+    //     })
+    //   } 
+    // })
     wx.getStorage({
       key: 'token',
       success (res) {
@@ -25,15 +26,12 @@ Page({
       } 
     })
     
-    // console.log(query)
-    if (query && query.thirduid) {
-      let thirduid = query.thirduid
+    if (query && query.email) {
+      let email = query.email
       this.setData({
-        thirduid,
+        email,
       })
-      this.getMultiUser(thirduid)
-    } else {
-      console.log(this.data.userInfo.sex)
+      this.getMultiUser(email)
     }
   },
   navigatItem(e) {
@@ -45,27 +43,21 @@ Page({
     })
   },
   // 获取其他用户信息
-  getMultiUser(ids) {
-    const auth = this.data.auth
+  getMultiUser(email) {
+    let that = this
     wx.request({
-      url: `${config.lccroApiMsRequestUrl}/get_multi_user`,
-      data: {
-        uid: auth.uid,
-        src: 'web',
-        device_id: auth.clientId,
-        token: auth.token,
-        ids,
-        cols: 'objectId|username|avatar_large|avatarLarge|role|company|jobTitle|self_description|selfDescription|blogAddress|isUnitedAuthor|isAuthor|authData|totalHotIndex|postedEntriesCount|postedPostsCount|collectedEntriesCount|likedPinCount|collectionSetCount|subscribedTagsCount|followeesCount|followersCount|pinCount',
-      },
+      url: config.user.getInfo + "/" + email,
+      header: {"authorization" : that.data.token},
       success: (res) => {
         let data = res.data
-        if (data.s === 1) {
+        console.log(data);
+        if (data.code == 200) {
           this.setData({
-            userInfo: data.d && data.d[ids],
+            userInfo: data.data
           })
         } else {
           wx.showToast({
-            title: data.m.toString(),
+            title: data.errorMsg,
             icon: 'none',
           })
         }

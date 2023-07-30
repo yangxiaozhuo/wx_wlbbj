@@ -1,0 +1,36 @@
+<!-- 简单版 -->
+<wxs module='filters' src='../../filter/filter.wxs'></wxs>
+<view class="scroll-list">
+    <block wx:for="{{chatList}}" wx:for-index="index" wx:for-item="item" wx:key="item">
+        <view wx:if="{{item.createdTime}}" class="show-date">
+          {{filters.timeBefore(item.createdTime)}}
+        </view>
+        <!-- <view wx:if="{{item.type=='custom'}}" class="row tips-text">
+            <text>{{login.id==item.msgId?'你':item.nickname}}撤回了一条消息</text>
+        </view> -->
+        <view class="{{userInfo.email==item.fromId?'row row-self':'row'}}" >
+            <view class="{{userInfo.email==item.fromId?'head-self':'head-friend'}}">
+                <image class="avatar" src="{{item.fromAvatar}}"></image>
+            </view>
+            <view>
+                <view wx:if="{{userInfo.email!=item.fromId}}" class="nick">{{item.fromNickname}}</view>
+                <view class="{{userInfo.email==item.fromId?'message msg-self':'message msg-friend'}}">
+                    <text>{{item.content}}</text>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+<!-- 发送信息 -->
+<view class="footer">
+    <view class="row">
+        <view class="input-box">
+            <textarea class="text-area" placeholder-class="placeholder" show-confirm-bar="{{false}}" cursor-spacing="30" maxlength="500"
+            disable-default-padding="{{true}}"
+            confirm-hold="{{true}}" hold-keyboard="{{true}}" auto-height="false" placeholder="输入信息" bindinput="inputClick" value="{{content}}"></textarea>
+        </view>
+        <view class="send-btn" wx:if="{{content!=''}}">
+            <text class="send-text" bindtap="sendClick">发 送</text>
+        </view>
+    </view>
+</view>

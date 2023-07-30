@@ -1,5 +1,3 @@
-<!-- pages/index/index.wxml -->
-
 <view class="container">
   <view wx:for="{{posts}}" wx:key="index" class="post-item" bindtap="onPostTap" data-post="{{item}}">
     <view class="post-header">

@@ -1,0 +1,20 @@
+<wxs module='filters' src='../../filter/filter.wxs'></wxs>
+<van-search
+  value="{{ searchKey }}"
+  input-align="center"
+  bind:search = "onSearch"
+  bind:change="onChange"
+  placeholder="请输入搜索关键词"
+/>
+<view class='container'>
+  <view class='hot card'>
+    <view class='btitle' wx:if="{{rankList.length == 0}}" >
+      <view class='l'>
+        <image class='icon' src='/img/pin_hot.png'></image>
+        <view>热门文章</view>
+      </view>
+    </view>
+    <hotPost item='{{item}}' wx:if="{{rankList.length == 0}}" wx:for='{{hotList}}' wx:key='index'></hotPost>
+    <searchPost item='{{item}}' wx:for='{{rankList}}' wx:key='index'></searchPost>
+  </view>
+</view>

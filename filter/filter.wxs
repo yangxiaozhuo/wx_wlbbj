@@ -8,7 +8,7 @@ var join = function (arr, item, separator) {
 
 var timeBefore = function (date) {
   if (!date) {
-    return '';
+    return 'aa';
   }
   var rexp = getRegExp('TZ', 'g');
   date = date.replace(rexp, ' ');
@@ -30,6 +30,8 @@ var timeBefore = function (date) {
     return parseInt(dvalue / monthTime) + '月前';
   } else if (dvalue >= yearTime) {
     return parseInt(dvalue / yearTime) + '年前';
+  } else {
+    return "a"
   }
 };
 

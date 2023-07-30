@@ -6,22 +6,10 @@ Page({
     token: "",
     currentSwiper: '0',
     list: [],
-    // list: [{"content": "回答我啊等哈我回到武汉电脑玩电脑玩电脑哦i海盗湾活动i挖掘嗲我们见到啊我i多久哦挖掘到我的默哀你的哦i啊是大家哦啊我能见到五年电动i闹i偶就导电膜阿萨",
-    // "conversionId": "123456@whut.edu.cn->290059@whut.edu.cn",
-    // "createdTime": "2023-07-25T00:50:10.000+00:00",
-    // "fromAvatar": "http://qiniu.yangxiaobai.top/avatar/2023/07/bffkjo52wn.jpg",
-    // "fromId": "290059@whut.edu.cn",
-    // "fromNickname": "杨小白2",
-    // "id": 427,
-    // "status": 0,
-    // "toAvatar": "http://qiniu.yangxiaobai.top/avatar/2023/07/h4ea0p2em2.jpg",
-    // "toId": "123456@whut.edu.cn",
-    // "toNickname": "xiaobai",
-    // "unread": 100
-    // }],
     systemInfoList: [],
     UserNotification: 0,
     SystemNotification: 0,
+    currentPage: 1,
   },
   onShow() {
     let that = this;
@@ -90,10 +78,20 @@ Page({
       url: `/pages/post/post?id=${e.currentTarget.dataset.id}`,
     })
   },
-  toPersonal(e) {
+  toConversion(e) {
+    console.log(e)
     let id = e.currentTarget.dataset.id
+    console.log(id);
     wx.navigateTo({
-      url: `/pages/personal/personal?thirduid=${id}`,
+      url: `/pages/conversion/conversion?userId=${id}`,
+    })
+  },
+  toPersonal(e) {
+    console.log(e)
+    let id = e.currentTarget.dataset.id
+    console.log(id)
+    wx.navigateTo({
+      url: `/pages/personal/personal?email=${id}`,
     })
   },
   // 获取有多少条未读的用户消息
@@ -121,7 +119,7 @@ Page({
       success: (res) => {
         let result = res.data
         if (result.code == 200) {
-          console.log("updata num")
+          console.log("getUnreadSystemNotification() true")
           console.log(result.data);
           that.setData({SystemNotification:result.data})
         }
@@ -130,9 +128,16 @@ Page({
   },
   // 获取用户消息
   getUserNotification() {
+    console.log("tt");
+    console.log(this.data.list.length)
+    console.log(this.data.currentPage)
+    if(this.data.list.length > (this.data.currentPage - 1) * 10) {
+      return;
+    }
+    console.log("tt2");
     let that = this
     wx.request({
-      url: config.message.UserFirstList,
+      url: config.message.UserFirstList + `?current=` + that.data.currentPage,
       header: {"authorization" : that.data.token},
       success: (res) => {
         let data = res.data
@@ -143,7 +148,7 @@ Page({
           })
         } else {
           wx.showToast({
-            title: data.m.toString(),
+            title: data.errorMsg,
             icon: 'none',
           })
         }
@@ -167,13 +172,13 @@ Page({
         console.log("SystemFirstList===============")
         console.log(data)
         if (data.code === 200) {
-          let systemInfoList = data.data
+          let newsystemInfoList = data.data
           this.setData({
-            systemInfoList: that.data.systemInfoList.concat(systemInfoList),
+            systemInfoList: newsystemInfoList,
           })
         } else {
           wx.showToast({
-            title: data.m.toString(),
+            title: data.errorMsg,
             icon: 'none',
           })
         }

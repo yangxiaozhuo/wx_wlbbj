@@ -60,7 +60,7 @@ Page({
     console.log("Page:info userNotificationNum() start")
     let token = this.data.token
     wx.request({
-      url: config.getAllUnreadMessage,
+      url: config.message.AllUnreadMessage,
       method: 'GET',
       header: {"authorization" : token},
       success: (res) => {

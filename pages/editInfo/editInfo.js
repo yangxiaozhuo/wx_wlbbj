@@ -139,7 +139,7 @@ Page({
               let data = res.data
               if (data.code === 200) {
                 wx.request({
-                  url: config.getUserInfo + that.data.userInfo.email,
+                  url: config.user.getInfo  + that.data.userInfo.email,
                   success: (res) => {
                     console.log(res)
                     let data = res.data
@@ -190,7 +190,8 @@ Page({
       icon: 'none',
     })
     wx.uploadFile({
-      url: 'https://wlbbj.yangxiaobai.top/user/uploadAvatar', // 仅为示例，非真实的接口地址
+      url: config.user.uploadAvatar, // 仅为示例，非真实的接口地址
+      // url: 'http://localhost:8081/user/uploadAvatar', 
       filePath: file.url,
       header: {"authorization" : that.data.token},
       name: 'file',
@@ -203,6 +204,10 @@ Page({
         var result = JSON.parse(res.data);
         console.log(result)
         if(result.code == 200) {
+          wx.showToast({
+            title: '上传成功',
+            icon: 'none',
+          })
           wx.request({
             url: config.getUserInfo + that.data.userInfo.email,
             success: (res) => {
@@ -212,13 +217,8 @@ Page({
                     key: 'auth',
                     data: data.data
                 })
-                wx.getStorage({
-                  key: 'auth',
-                  success (res) {
-                    that.setData({
-                      userInfo: res.data
-                    })
-                  }
+                that.setData({
+                  userInfo : data.data
                 })
               } else {
                   wx.showToast({
@@ -241,12 +241,13 @@ Page({
             icon: 'none',
           })
         }
-        // // 上传完成需要更新 fileList
-        // const { fileList = [] } = this.data;
-        // fileList.push({ ...file, url: res.data.data });
-        // this.setData({ fileList });
-      },fail(res) {
+      },
+      fail(res) {
         console.log(res)
+        wx.showToast({
+          title: '上传fail',
+          icon: 'none',
+        })
       }
     });
   },

@@ -16,7 +16,7 @@
 }
 .form view {
   border-radius: 4rpx;
-  background: #fff;
+  /* background: #fff; */
 }
 .form input {
   width: 100%;
@@ -35,11 +35,6 @@
   text-align: center;
   border-radius: 4rpx;
   background: rgba(0, 0, 0, .1);
-}
-.create {
-  color: skyblue;
-  padding-left: 10px;
-  padding-top: 10px;
 }
 .footer {
   height: 120rpx;

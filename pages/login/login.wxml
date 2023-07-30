@@ -25,6 +25,7 @@
         </van-cell-group>
       </view>
     </form>
+    <view class="create" catchtap='create'>点此注册</view>
     <van-button custom-style="margin-top: 40rpx;" block round type="info" bind:click="commit">登录</van-button>
   </view>
   <view class='footer'>武理论坛·whut</view>
