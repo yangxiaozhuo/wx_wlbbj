@@ -1,5 +1,16 @@
 /* pages/index/index.wxss */
-
+.add{  
+  position: fixed;
+  bottom: 30px; /* 将按钮固定在页面底部，可以根据实际需要调整距离底部的距离 */
+  right: 5%; /* 将按钮水平居中，可以根据实际需要调整 */
+  transform: translateX(-50%); /* 将按钮水平居中，可以根据实际需要调整 */
+  background-color: #007bff; /* 设置按钮的背景颜色，根据需要调整 */
+  color: #ffffff; /* 设置按钮文本的颜色，根据需要调整 */
+  opacity: 0.8;
+  padding: 10px 10px; /* 设置按钮的内边距，根据需要调整 */
+  border-radius: 40px; /* 设置按钮的圆角，根据需要调整 */
+  z-index: 999; /* 设置按钮的堆叠顺序，根据需要调整 */
+}
 .container {
   display: flex;
   flex-direction: column;

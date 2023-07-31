@@ -15,7 +15,9 @@
     "components/searchPost/searchPost",
     "pages/post/post",
     "components/hotPost/hotPost",
-    "pages/loginUp/loginUp"
+    "pages/loginUp/loginUp",
+    "pages/feedback/feedback",
+    "pages/add/add"
   ],
   "window": {
     "backgroundTextStyle": "light",

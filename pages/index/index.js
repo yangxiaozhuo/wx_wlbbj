@@ -48,4 +48,9 @@ Page({
     });
     this.loadPosts();
   },
+  add() {
+    wx.navigateTo({
+      url: '../add/add',
+    })
+  }
 });

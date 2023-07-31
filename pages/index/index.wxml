@@ -1,10 +1,12 @@
+<wxs module='filters' src='../../filter/filter.wxs'></wxs>
 <view class="container">
   <view wx:for="{{posts}}" wx:key="index" class="post-item" bindtap="onPostTap" data-post="{{item}}">
     <view class="post-header">
       <image class="avatar" src="{{item.avatar}}"></image>
       <view class="post-info">
         <view class="post-author">{{item.name}}</view>
-        <view class="post-time">{{item.createdTime}}</view>
+        <!-- <view>{{filters.timeBefore(item.createdTime)}}</view> -->
+        <view class="post-time">{{filters.timeBefore(item.createdTime)}}</view>
       </view>
     </view>
     <view class="post-body">
@@ -20,5 +22,8 @@
         </scroll-view>
       </view>
     </view>
+  </view>
+  <view class="add">
+    <van-icon class="page-button" size = "30px" bindtap="add" name="plus" />
   </view>
 </view>

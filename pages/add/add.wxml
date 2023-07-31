@@ -1,0 +1,33 @@
+<view class="container">
+  <van-uploader file-list="{{ fileList }}" 
+  max-count="9" 
+  bind:after-read="afterRead" bind:delete="delete" bind:click-preview="preview"/>
+
+  <!-- 标题输入框 -->
+  <input placeholder="请输入标题" bindinput="onTitleInput" />
+
+  <!-- 内容输入框 -->
+  <textarea placeholder="请输入内容" bindinput="onContentInput"></textarea>
+
+  <!-- 分类选择 -->
+  <picker mode="selector" range="{{categories}}" bindchange="onCategoryChange">
+    <view class="picker">
+      所属分类：{{selectedCategory}}
+    </view>
+  </picker>
+
+  <!-- 上传图片 -->
+  <view class="upload-image">
+    <view class="upload-btn" bindtap="chooseImage">
+      <text>上传图片</text>
+    </view>
+    <view class="image-list">
+      <view wx:for="{{imageList}}" wx:key="{{index}}">
+        <image src="{{item}}" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-btn" bindtap="submitArticle">提交文章</view>
+</view>
