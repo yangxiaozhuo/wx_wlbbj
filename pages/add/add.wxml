@@ -1,33 +1,43 @@
 <view class="container">
   <van-uploader file-list="{{ fileList }}" 
   max-count="9" 
+  multiple="true"
+  max-size="1100000"
+  accept="image"
+  preview-size="120px"
+  bind:oversize="oversize"
   bind:after-read="afterRead" bind:delete="delete" bind:click-preview="preview"/>
 
   <!-- 标题输入框 -->
-  <input placeholder="请输入标题" bindinput="onTitleInput" />
+  <van-cell-group>
+  <van-field
+    model:value="{{ title }}"
+    placeholder="请输入标题"
+    maxlength="20"
+    border="{{ true }}"
+  />
+</van-cell-group>
 
-  <!-- 内容输入框 -->
-  <textarea placeholder="请输入内容" bindinput="onContentInput"></textarea>
+<van-cell-group>
+  <van-field
+    value="{{ content }}"
+    type="textarea"
+    placeholder="请输入内容"
+    autosize
+    border="{{ true }}"
+  />
+</van-cell-group>
 
-  <!-- 分类选择 -->
-  <picker mode="selector" range="{{categories}}" bindchange="onCategoryChange">
-    <view class="picker">
-      所属分类：{{selectedCategory}}
-    </view>
-  </picker>
+<van-dropdown-menu>
+  <van-dropdown-item  value="{{ value }}" options="{{ option }}" 
+  bind:change="onSwitchChange"
+  />
+</van-dropdown-menu>
 
-  <!-- 上传图片 -->
-  <view class="upload-image">
-    <view class="upload-btn" bindtap="chooseImage">
-      <text>上传图片</text>
-    </view>
-    <view class="image-list">
-      <view wx:for="{{imageList}}" wx:key="{{index}}">
-        <image src="{{item}}" />
-      </view>
-    </view>
-  </view>
+
 
   <!-- 提交按钮 -->
-  <view class="submit-btn" bindtap="submitArticle">提交文章</view>
+  <view class="button">
+    <van-button bind:click="submit" round size="large" type="info" block>圆形按钮</van-button>
+  </view>
 </view>
