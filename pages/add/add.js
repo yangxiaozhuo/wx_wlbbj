@@ -8,8 +8,9 @@ Page({
     value: 0,
     fileList: [],
     urls: [],
-    title: '',
-    content: '',
+    title: '价格',
+    content: '价格',
+    categoryId: -1,
   },
   afterRead(event) {
     const { file } = event.detail;
@@ -21,7 +22,7 @@ Page({
       }
       that.setData({
         fileList : that.data.fileList.concat(temp),
-        urls : that.data.urls.concat(temp.url)
+        urls : that.data.urls.concat(file[index].tempFilePath)
       })
     }
   },
@@ -43,14 +44,10 @@ Page({
   preview(e) {
     let index = e.detail.index;
     let urls = this.data.urls;
-    var sources =[{
+    wx.previewImage({
       urls,
       current: urls[index],
-      // urls: this.data.fileList,
-      // current:this.data.fileList[index].url
-      // url:this.data.fileList[index].url
-    }]
-    wx.previewMedia({sources:sources})
+    })
   },
   oversize(e){
     wx.showToast({
@@ -122,12 +119,86 @@ Page({
     })
   },
   submit(e){
+    wx.showToast({
+      title: '暂未开放',
+      icon: 'none',
+    })
+    return
+    let that = this
+    if(that.data.categoryId == -1) {
+      wx.showToast({
+        title: "请选择分类",
+        icon: 'none',
+      })
+      return
+    }
+    if(that.data.title == "") {
+      wx.showToast({
+        title: "标题不能为空",
+        icon: 'none',
+      })
+      return
+    }
+    if(that.data.content == "") {
+      wx.showToast({
+        title: "标题不能为空",
+        icon: 'none',
+      })
+      return
+    }
+    console.log(this.data);
+    let token = that.data.token
+    // const formDate = new FormData()
+    // formDate.append('articleCategoryId', articleCategoryId.toString())
+    // formDate.append('articleContent', articleContent )
+    // formDate.append('articleTitle', articleTitle)
+    // list.forEach(file => {
+    //   formDate.append('files', file)
+    // })
+    wx.uploadFile({
+      url: config.article.CreatArticle,
+      header: {
+        "authorization" : token
+      },
+      filePath: that.data.urls,
+      // filePath: "",
+      name: 'files',
+      method:"POST",
+      formData: {
+        "articleCategoryId": "1",
+        "articleContent": that.data.content,
+        "articleTitle": that.data.title,
+        // "files" : that.data.urls[0],
+        "files" : that.data.urls[1],
+        "files" : that.data.urls[2],
+      },
+      success: (res) => {
+        console.log(res)
+        let data = res.data
+        if (data.code === 200) {
+        } else {
+          wx.showToast({
+            title: data.errorMsg,
+            icon: 'none',
+          })
+        }
+      },
+      fail: () => {
+        wx.showToast({
+          title: '网路开小差，请稍后再试',
+          icon: 'none',
+        })
+      },
+    })
     console.log(e);
     console.log(this.data);
   },
   onSwitchChange(e){
     let index = e.detail;
-    console.log(index);
+    // console.log(index);
+    this.setData({
+      categoryId: index
+    })
     // console.log(e);
   }
 });

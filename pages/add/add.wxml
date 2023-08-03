@@ -4,7 +4,7 @@
   multiple="true"
   max-size="1100000"
   accept="image"
-  preview-size="120px"
+  preview-size="110px"
   bind:oversize="oversize"
   bind:after-read="afterRead" bind:delete="delete" bind:click-preview="preview"/>
 
@@ -20,7 +20,7 @@
 
 <van-cell-group>
   <van-field
-    value="{{ content }}"
+    model:value="{{ content }}"
     type="textarea"
     placeholder="请输入内容"
     autosize
@@ -38,6 +38,6 @@
 
   <!-- 提交按钮 -->
   <view class="button">
-    <van-button bind:click="submit" round size="large" type="info" block>圆形按钮</van-button>
+    <van-button bind:click="submit" round size="large" type="info" block>发布</van-button>
   </view>
 </view>

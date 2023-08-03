@@ -54,5 +54,8 @@
         "selectedIconPath": "img/tab_profile.png"
       }
     ]
+  },
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon/index"
   }
 }

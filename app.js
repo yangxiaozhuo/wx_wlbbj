@@ -43,6 +43,7 @@ App({
         GetArticleInfo:"https://wlbbj.yangxiaobai.top/article/detail/", // 获得某个文章详情
         LikeArticle: "https://wlbbj.yangxiaobai.top/article/like/", // 点赞
         HotArticle: "https://wlbbj.yangxiaobai.top/article/hot", // 热点
+        CreatArticle: "https://wlbbj.yangxiaobai.top/article/create", // 发布
       },
       category: {
         GetCategory: "https://wlbbj.yangxiaobai.top/category", 
