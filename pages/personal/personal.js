@@ -69,5 +69,13 @@ Page({
         })
       },
     })
+  },  
+  toConversion(e) {
+    console.log(e)
+    let id = this.data.userInfo.email
+    console.log(id);
+    wx.navigateTo({
+      url: `/pages/conversion/conversion?userId=${id}`,
+    })
   },
 })

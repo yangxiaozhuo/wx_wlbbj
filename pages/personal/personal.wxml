@@ -9,6 +9,7 @@
         <!-- <view class='jobtitle'>{{userInfo.jobTitle}}</view> -->
         <!-- <view class='others'>{{userInfo.selfDescription }}</view> -->
       </view>
+      <view class='mess' catchtap='toConversion'>私信</view>
     </view>
     <view class='bottom'>
       <view class='l'>

@@ -44,12 +44,13 @@ App({
         LikeArticle: "https://wlbbj.yangxiaobai.top/article/like/", // 点赞
         HotArticle: "https://wlbbj.yangxiaobai.top/article/hot", // 热点
         CreatArticle: "https://wlbbj.yangxiaobai.top/article/create", // 发布
+        UploadArticle: "https://wlbbj.yangxiaobai.top/article/uploadArticle", // 上传文章
+        UpdateImg: "https://wlbbj.yangxiaobai.top/article/updateImg", // 添加文章图片
+        UploadImage: "https://wlbbj.yangxiaobai.top/article/uploadImage", // 上传文章图片
       },
       category: {
         GetCategory: "https://wlbbj.yangxiaobai.top/category", 
       }
-
-      
     }
   },
 })

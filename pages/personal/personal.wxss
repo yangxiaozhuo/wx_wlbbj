@@ -68,3 +68,15 @@
   width: 60rpx;
   height: 60rpx;
 }
+.mess {
+  font-size: 24rpx;
+  margin: 10px 10px 0px 0px;
+  padding: 0 30rpx;
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  color: #3281ff;
+  border: 3rpx solid #3281ff;
+  /* border-radius: 18rpx; */
+}

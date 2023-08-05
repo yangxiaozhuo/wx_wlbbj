@@ -37,7 +37,7 @@ Page({
     })
     console.log("load")
     console.log(this.data)
-    let id = query.id
+    let id = query.id || 130
     this.getDetailData(id)
   },
   preview (e) {
@@ -67,7 +67,12 @@ Page({
         console.log(res);
         let data = res.data
         if (data.code == 200) {
-          data.data.articleImg = data.data.articleImg.split(";")
+          if(data.data.articleImg == "") {
+            data.data.articleImg = null
+          }
+          if(data.data.articleImg != null) {
+            data.data.articleImg = data.data.articleImg.split(";")
+          }
           this.setData({
             postInfo: data.data,
           })
@@ -129,5 +134,8 @@ Page({
         })
       },
     })
+  },
+  comment() {
+    console.log(111);
   }
 })

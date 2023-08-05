@@ -18,7 +18,7 @@
   <view wx:if='{{postInfo.articleCategoryName}}' class='tag'>{{postInfo.articleCategoryName}}</view>
   <text class="title">{{postInfo.articleTitle}}</text>
   <text decode class='content'>{{postInfo.articleContent}}</text>
-  <view class='pictures' wx:if='{{postInfo.articleImg && postInfo.articleImg.length}}'>
+  <view class='pictures' wx:if='{{postInfo.articleImg && postInfo.articleImg.length > 0}}'>
     <!-- 大于等于两张图片 -->
     <view data-index='{{index}}' data-urls='{{postInfo.articleImg}}' catchtap='preview' class='picture' style='width:33.33%;height:228rpx;' wx:key='index' wx:for='{{postInfo.articleImg}}' wx:for-item='i' wx:if='{{postInfo.articleImg.length >= 2}}'>
       <jImage wx:key='index' mode='aspectFill' src='{{i}}'></jImage>
@@ -34,7 +34,7 @@
     <image wx:if='{{!postInfo.liked}}'  src='/img/zan_grey_feidian3.png'></image>
     <text>{{postInfo.articleLikeCount || '赞'}}</text>
   </view>
-  <view class='i'>
+  <view class='i' bindtap="comment">
     <image src='/img/fd_reply.png'></image><text>{{postInfo.articleCommentCount || '评论'}}</text>
   </view>
   <view class='i'>

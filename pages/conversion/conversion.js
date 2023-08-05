@@ -121,6 +121,9 @@ Page({
         let data = res.data
         if(data.code == 200) {
           that.setData({"otherUserInfo": data.data})
+          wx.setNavigationBarTitle({
+            title: (data.data.nickName) || '私信'
+          })
         }
       }
     })

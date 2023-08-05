@@ -8,9 +8,10 @@ Page({
     value: 0,
     fileList: [],
     urls: [],
-    title: '价格',
-    content: '价格',
+    title: '',
+    content: '',
     categoryId: -1,
+    loading: false,
   },
   afterRead(event) {
     const { file } = event.detail;
@@ -119,17 +120,15 @@ Page({
     })
   },
   submit(e){
-    wx.showToast({
-      title: '暂未开放',
-      icon: 'none',
-    })
-    return
+    console.log(this.data);
+    this.setData({loading: true})
     let that = this
     if(that.data.categoryId == -1) {
       wx.showToast({
         title: "请选择分类",
         icon: 'none',
       })
+      this.setData({loading: false})
       return
     }
     if(that.data.title == "") {
@@ -137,6 +136,7 @@ Page({
         title: "标题不能为空",
         icon: 'none',
       })
+      this.setData({loading: false})
       return
     }
     if(that.data.content == "") {
@@ -144,41 +144,85 @@ Page({
         title: "标题不能为空",
         icon: 'none',
       })
+      this.setData({loading: false})
       return
     }
-    console.log(this.data);
     let token = that.data.token
-    // const formDate = new FormData()
-    // formDate.append('articleCategoryId', articleCategoryId.toString())
-    // formDate.append('articleContent', articleContent )
-    // formDate.append('articleTitle', articleTitle)
-    // list.forEach(file => {
-    //   formDate.append('files', file)
-    // })
-    wx.uploadFile({
-      url: config.article.CreatArticle,
+    wx.request({
+      url: config.article.UploadArticle,
       header: {
         "authorization" : token
       },
-      filePath: that.data.urls,
-      // filePath: "",
-      name: 'files',
       method:"POST",
-      formData: {
+      data: {
         "articleCategoryId": "1",
         "articleContent": that.data.content,
         "articleTitle": that.data.title,
-        // "files" : that.data.urls[0],
-        "files" : that.data.urls[1],
-        "files" : that.data.urls[2],
       },
       success: (res) => {
         console.log(res)
         let data = res.data
         if (data.code === 200) {
+          let id = data.data;
+          that.upload(id);
         } else {
           wx.showToast({
             title: data.errorMsg,
+            icon: 'none',
+          })
+          this.setData({loading: false})
+        }
+      },
+      fail: () => {
+        wx.showToast({
+          title: '网路开小差，请稍后再试',
+          icon: 'none',
+        })
+        this.setData({loading: false})
+      },
+    })
+  },
+  upload(id) {
+    wx.showToast({
+      title: "发布中",
+      icon: 'none',
+    })
+    if(this.data.urls.length != 0) {
+      let res = []
+      this.uploadImages(id, 0, res);
+    } else {
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
+      this.setData({loading: false})
+    }
+  },
+  update(urls, id) {
+    let that = this
+    wx.request({
+      url: config.article.UpdateImg,
+      header: {
+        "authorization" : that.data.token
+      },
+      method:"POST",
+      data: {
+        "id": id,
+        "urls":urls
+      },
+      success: (res) => {
+        console.log(res)
+        let data = res.data
+        if (data.code === 200) {
+          wx.showToast({
+            title: "发布成功",
+            icon: 'none',
+          })
+          wx.switchTab({
+            url: '/pages/index/index',
+          })
+        } else {
+          wx.showToast({
+            title: data.errorMsg || "系统异常",
             icon: 'none',
           })
         }
@@ -190,15 +234,53 @@ Page({
         })
       },
     })
-    console.log(e);
-    console.log(this.data);
+    this.setData({loading: false})
+  },
+  uploadImages(id, index, reslist) {
+    wx.showToast({
+      title: "已上传" + index + "张图片",
+      icon: 'none',
+    })
+    if(index == this.data.urls.length) {
+      this.update(reslist.join(";"),id);
+    } else {
+      const element = this.data.urls[index];
+      let that = this
+      wx.uploadFile({
+        url: config.article.UploadImage + '?id='+ id, 
+        filePath: element,
+        header: {"authorization" : that.data.token},
+        name: 'file',
+        method:"POST",
+        success(res) {
+          var result = JSON.parse(res.data);
+          console.log(result)
+          if(result.code == 200) {
+            reslist = reslist.concat(result.data)
+            that.uploadImages(id, index + 1, reslist)
+          } else {
+            wx.showToast({
+              title: result.errorMsg,
+              icon: 'none',
+            })
+            this.setData({loading: false})
+          }
+          return "";
+        },
+        fail() {
+          wx.showToast({
+            title: '图片上传失败',
+            icon: 'none',
+          })
+          this.setData({loading: false})
+        }
+      });
+    }
   },
   onSwitchChange(e){
     let index = e.detail;
-    // console.log(index);
     this.setData({
       categoryId: index
     })
-    // console.log(e);
   }
 });
