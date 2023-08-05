@@ -136,6 +136,9 @@ Page({
     })
   },
   comment() {
-    console.log(111);
+    wx.showToast({
+      title: "评论功能尚未开启",
+      icon: 'none',
+    })
   }
 })
