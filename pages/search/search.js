@@ -91,7 +91,9 @@ Page({
         if (data.code == 200) {
           let records = data.data.records
           for (let index = 0; index < records.length; index++) {
-            records[index].articleImg = records[index].articleImg.split(";");
+            if(records[index].articleImg != null && records[index].articleImg != "") {
+              records[index].articleImg = records[index].articleImg.split(";");
+            }
           }
           that.setData({
             hotList: records

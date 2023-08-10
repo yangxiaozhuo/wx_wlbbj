@@ -9,10 +9,34 @@ Page({
     pageSize: 10,
   },
   onShow: function() {
-    this.loadPosts();
+    let that = this
+    this.setData({currentPage: 1})
+    wx.request({
+      url: 'https://wlbbj.yangxiaobai.top/article/new',
+      data: {
+        current: 1,
+        // pageSize: that.data.pageSize,
+      },
+      success: function(res) {
+        console.log(res)
+        // var data = that.data.posts.concat(res.data)[0].data;
+        var data = res.data.data
+        console.log(data)
+        var posts = data['records'];
+        posts.forEach(element => {
+          if (element.articleImg) {
+            element.articleImg = element.articleImg.split(";");
+          }
+        });
+        that.setData({
+          posts: posts,
+        });
+      },
+    });
   },
   loadPosts: function() {
     var that = this;
+    console.log(this.data);
     wx.request({
       url: 'https://wlbbj.yangxiaobai.top/article/new',
       data: {
